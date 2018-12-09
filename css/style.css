@@ -1,0 +1,46 @@
+
+.reveal h1 {
+	font-size: 2.5em;
+}
+.reveal h2 {
+  color: #00cc66;
+	font-size: 1.5em;
+	margin-bottom: 50px;
+}
+
+.reveal h3 {
+  color: #00cc66;
+	font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.reveal p {
+  line-height: 1.7;
+}
+
+.author {
+	color: #00cc66;
+}
+
+.reveal img.trigger-img {
+	max-height: 100px;
+  margin: 20px;
+}
+
+ul.plan li {
+  padding: 20px;
+}
+
+.triggers h3 {
+  margin-top: 40px;
+}
+
+.reveal pre code {
+  padding: 15px;
+}
+
+.reveal p.event-listener-func,
+span.lower {
+  font-size: 26px;
+  text-align: left;
+}

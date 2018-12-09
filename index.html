@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/style.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+				  <h1>DOM Events</h1><br><br>
+          <span class="author">Elena Khalyavskaya</span>
+				</section>
+
+				<section>
+          <h2>Plan</h2>
+            <ul class="plan">
+              <li class="fragment">DOM Events: Triggers</li>
+              <li class="fragment">Types of Events</li>
+              <li class="fragment">Event Handling Models</li>
+              <li class="fragment">Event Object: properties and methods</li>
+            </ul>
+        </section>
+				<section class="triggers">
+          <section>
+            <h2>DOM Events: Triggers</h2>
+          </section>
+          <section>
+            <h3>DOM</h3>
+            <span>Document Object Model created by browser when a web page is loaded.</span>
+            <h3>Event</h3>
+            <span>it’s a signal that something has happened.</span>
+          </section>
+          <section>
+            <h3>Triggers - user actions</h3>
+            <img class="fragment trigger-img" src="./images/keyboard.png">
+            <img class="fragment trigger-img" src="./images/mouse.png">
+            <img class="fragment trigger-img" src="./images/touch.png">
+          </section>
+        </section>
+
+				<section>
+          <section>
+             <h2>Types of DOM Events</h2>
+          </section>
+          <section>
+            <h3>Mouse Events:</h3>
+            <ul class="mouse-events">
+              <li class="mouse-event">click</li>
+              <li class="mouse-event">contextmenu</li>
+              <li class="mouse-event">dblclick</li>
+              <li class="mouse-event">mouseover / mouseout </li>
+              <li class="mouse-event">mousedown / mouseup </li>
+              <li class="mouse-event">mousemove</li>
+            </ul>
+          </section>
+          
+          <section>
+            <h3>Keyboard Events:</h3>
+            <ul class="keyboard-events">
+              <li class="keyboard-event">keydown</li>
+              <li class="keyboard-event">keypress</li>
+              <li class="keyboard-event">keyup</li>
+            </ul>
+          </section>
+
+           <section>
+            <h3>Drag Events:</h3>
+            <ul class="drag-events">
+              <li class="drag-event">drag</li>
+              <li class="drag-event">dargend</li>
+              <li class="drag-event">dragenter</li>
+              <li class="drag-event">dragover</li>
+              <li class="drag-event">dragleave</li>
+              <li class="drag-event">dragstart</li>
+              <li class="drag-event">drop</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Focus Events</h3>
+            <ul class="focus-events">
+              <li class="focus-event">focus</li>
+              <li class="focus-event">blur</li>
+              <li class="focus-event">focusin / focusout</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Touch Events</h3>
+            <ul class="touch-events">
+              <li class="touch-event">touchstart</li>
+              <li class="touch-event">touchmove</li>
+              <li class="touch-event">touchend</li>
+              <li class="touch-event">touchcancel</li>
+            </ul>
+          </section>
+        </section>
+				<section>
+
+          <section>
+            <h2>Event Handling</h2>
+            <span>3 models</span>
+          </section> 
+
+          <section>
+            <h3>Inline</h3>
+            <span>handling event on HTML-attribute</span>
+            <pre>
+              <code class="fragment" data-trim>
+                <input value="Click me" onclick="alert('Click!')" type="button">
+              </code>
+            </pre>
+            <pre>
+              <code class="fragment" data-trim>
+                <script>
+                  function countRabbits() {
+                    for(let i=1; i<=3; i++) {
+                      alert("Rabbit number " + i);
+                    }
+                  }
+                </script>
+               <input type="button" onclick="countRabbits()" value="Count rabbits!">
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h3>traditional</h3>
+            <span>assign a handler using a DOM-property</span>
+            <pre>
+              <code class="fragment" data-trim>
+                  <input id="elem" type="button" value="Click me">
+                  <script>
+                    elem.onclick = function() {
+                      alert('Thank you');
+                    };
+                  </script>
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <span>DOM property overwritting</span>
+            <pre>
+              <code class="fragment" data-trim>
+                  input.onclick = function() { alert(1); }
+                  // ...
+                  // replaces the previous handler
+                  input.onclick = function() { alert(2); } 
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h3>W3C</h3>
+            <span>adding / removing Event Listener</span>
+            <pre>
+              <code class="fragment" data-trim>
+                 element.addEventListener(event, handler[, useCapture]);
+              </code>
+            </pre>
+            <p class="event-listener-func fragment">
+              <strong>event:</strong> Event name, e.g. "click".<br/>
+              <strong>handler:</strong> The handler function.<br/>
+              <strong>useCapture:</strong> An optional argument (boolean), capturing / bubbling . 
+            </p>
+          </section> 
+
+           <section>
+            <span>removing Event Listener</span>
+
+            <pre>
+              <code class="fragment" data-trim>
+                function handler(e) {
+                  alert( 'Thanks!' );
+                }
+
+                input.addEventListener("click", handler);
+                // ....
+                input.removeEventListener("click", handler);
+              </code>
+            </pre>
+            <span class="fragment lower">store function as variable</span>
+          </section> 
+
+        </section>
+
+        <section>
+          <section>
+            <h3>Event Object</h3>
+            <span> is an argument passed to event handler</span>
+             <pre>
+              <code class="fragment" data-trim>
+                <div id="myID">Click me</div>
+                  <script>
+                    var div = document.querySelector('#myID');
+                    div.addEventListener('click', function (e) {
+                      // e is EventObject
+                      assert(typeof e === 'object');
+                      assert(e instanceof Event)
+                    });
+                  </script>
+              </code>
+            </pre>
+          </section>
+
+          <section>
+            <h3>Event phases</h3>
+             <ul class="event-phases">
+                <li class="event-phase">capture phase</li>
+                <li class="event-phase">target phase</li>
+                <li class="event-phase">bubble phase</li>
+             </ul>
+          </section>
+          <section>
+            <img src="./images/scheme.png">
+          </section>
+
+           <section>
+            <h3>Event Properties</h3>
+            <ul class="fragment">
+              <li class="fragment">target</li>
+              <li class="fragment">currentTarget</li>
+              <li class="fragment">bubbles</li>
+              <li class="fragment">eventPhase</li>
+              <li class="fragment">type</li>
+            </ul>
+          </section>
+
+           <section>
+            <h3>Event Target</h3>
+            <span> is a link to DOM-element on which the event originally occured</span>
+             <pre>
+              <code class="fragment" data-trim>
+                <div id="myID">Click me</div>
+                  <script>
+                    var div = document.querySelector('#myID');
+                    div.addEventListener('click', function (e) {
+                      assert(e.target === div);
+                    });
+                  </script>
+              </code>
+            </pre>
+          </section>
+
+
+          <section>
+            <h3>Event Methods</h3>
+            <ul class="fragment">
+              <li class="fragment">preventDefault</li>
+              <li class="fragment">stopPropagation</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <span>Thanks !</span>
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
+
+
+<!-- 
+
+
+
+-->
